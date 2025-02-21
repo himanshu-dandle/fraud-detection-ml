@@ -4,7 +4,9 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/himanshu-dandle/fraud-detection-ml?color=blue)  
 ![GitHub last commit](https://img.shields.io/github/last-commit/himanshu-dandle/fraud-detection-ml)  
 
-🔗 **Live Web App:** 👉 [Click Here to Try!](https://fraud-detection-ml-nmqgvrtkbtrgcfyem9mxqf.streamlit.app/)  
+🔗 **Live Web App:** 👉 [Click Here to Try!](https://your-new-streamlit-app-link.streamlit.app/)
+
+
 💻 **GitHub Repository:** 👉 [fraud-detection-ml](https://github.com/himanshu-dandle/fraud-detection-ml)  
 
 ---
