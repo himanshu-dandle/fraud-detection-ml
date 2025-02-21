@@ -35,9 +35,14 @@ API_URL = "https://fraud-api-941838659836.us-central1.run.app/predict/"
 # Function to send request to FastAPI
 def get_prediction(data):
     try:
+        st.write("🔄 Sending request to API:", API_URL)
+        st.json(data)  # Debugging
+
         response = requests.post(API_URL, json=data)
-        response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
+        response.raise_for_status()  # Raise error for bad responses (4xx, 5xx)
         result = response.json()
+
+        st.write("✅ API Response:", result)  # Debugging
 
         # Check if expected fields are present in the response
         if "prediction" in result and "fraud_probability" in result:
@@ -55,6 +60,7 @@ if st.button("🎲 Randomize Values"):
 
 # Button to send request
 if st.button("🔍 Check Fraud"):
+    st.write("📤 Sending user inputs:", user_inputs)  # Debugging
     prediction, probability = get_prediction(user_inputs)
 
     if prediction is not None:
