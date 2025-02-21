@@ -1,6 +1,22 @@
+# Data Processing
 pandas
 numpy
 matplotlib
 seaborn
 scikit-learn
-jupyter
+
+# Backend (FastAPI API)
+fastapi
+uvicorn
+
+# Frontend (Streamlit UI)
+streamlit
+requests
+
+# Model Handling & Deployment
+joblib
+xgboost
+scipy
+
+# Imbalanced Data Handling
+imbalanced-learn
