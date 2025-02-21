@@ -14,11 +14,6 @@ def generate_random_values():
 if "default_values" not in st.session_state:
     st.session_state.default_values = generate_random_values()
 
-# Function to update session state for new random values
-def update_random_values():
-    st.session_state.default_values = generate_random_values()
-    st.rerun()  # ✅ Correct Streamlit function
-
 # Input fields with default values from session state
 features = [f"V{i}" for i in range(1, 29)] + ["Hour"]
 user_inputs = {}
@@ -35,12 +30,9 @@ API_URL = "https://fraud-api-941838659836.us-central1.run.app/predict/"
 # Function to send request to FastAPI
 def get_prediction(data):
     try:
-        st.write("🔄 Sending request to API:", API_URL)
         response = requests.post(API_URL, json=data)
-        response.raise_for_status()  # Raise error for bad responses (4xx, 5xx)
-
+        response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
         result = response.json()
-        st.write("✅ API Response:", result)  # Debugging
 
         # Validate API response format
         if isinstance(result, dict) and "prediction" in result and "fraud_probability" in result:
@@ -51,10 +43,6 @@ def get_prediction(data):
     except requests.exceptions.RequestException as e:
         st.error(f"⚠ API request failed: {str(e)}")
         return None, None
-
-# Add a "Randomize Values" button
-if st.button("🎲 Randomize Values"):
-    update_random_values()
 
 # Button to send request
 if st.button("🔍 Check Fraud"):
