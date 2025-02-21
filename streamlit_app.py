@@ -17,7 +17,7 @@ if "default_values" not in st.session_state:
 # Function to update session state for new random values
 def update_random_values():
     st.session_state.default_values = generate_random_values()
-    st.rerun()
+    st.rerun()  # ✅ Correct Streamlit function
 
 # Input fields with default values from session state
 features = [f"V{i}" for i in range(1, 29)] + ["Hour"]
@@ -36,16 +36,14 @@ API_URL = "https://fraud-api-941838659836.us-central1.run.app/predict/"
 def get_prediction(data):
     try:
         st.write("🔄 Sending request to API:", API_URL)
-        st.json(data)  # Debugging
-
         response = requests.post(API_URL, json=data)
         response.raise_for_status()  # Raise error for bad responses (4xx, 5xx)
-        result = response.json()
 
+        result = response.json()
         st.write("✅ API Response:", result)  # Debugging
 
-        # Check if expected fields are present in the response
-        if "prediction" in result and "fraud_probability" in result:
+        # Validate API response format
+        if isinstance(result, dict) and "prediction" in result and "fraud_probability" in result:
             return result["prediction"], result["fraud_probability"]
         else:
             st.error("⚠ API returned an unexpected response format.")
