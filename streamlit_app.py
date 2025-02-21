@@ -66,7 +66,9 @@ def get_prediction():
 
 # Add a "Randomize Values" button
 if st.button("🎲 Randomize Values"):
-    st.experimental_rerun()
+    ##st.experimental_rerun()
+    st.rerun()
+
 
 # Button to send request
 if st.button("🔍 Check Fraud"):
