@@ -6,13 +6,13 @@ import random
 st.title("💳 Fraud Detection System")
 st.write("Enter transaction details and click 'Check Fraud'.")
 
-# Function to generate random transaction values
-def generate_random_values():
-    return [round(random.uniform(-3, 3), 6) for _ in range(28)] + [random.randint(0, 23)]
+# Function to generate default transaction values
+def generate_default_values():
+    return [0.0] * 28 + [12]  # Default: All zeros, Hour set to 12 noon
 
 # Initialize session state if not already set
 if "default_values" not in st.session_state:
-    st.session_state.default_values = generate_random_values()
+    st.session_state.default_values = generate_default_values()
 
 # Input fields with default values from session state
 features = [f"V{i}" for i in range(1, 29)] + ["Hour"]
@@ -46,7 +46,6 @@ def get_prediction(data):
 
 # Button to send request
 if st.button("🔍 Check Fraud"):
-    st.write("📤 Sending user inputs:", user_inputs)  # Debugging
     prediction, probability = get_prediction(user_inputs)
 
     if prediction is not None:
