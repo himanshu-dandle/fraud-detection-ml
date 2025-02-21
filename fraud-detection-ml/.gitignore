@@ -1,0 +1,25 @@
+# Ignore virtual environments
+venv_fd/
+
+# Ignore data files (large datasets)
+data/
+datasets/
+
+# Ignore model files (can be large)
+models/
+*.pkl
+
+# Ignore cache and unnecessary files
+__pycache__/
+.ipynb_checkpoints/
+*.log
+
+# Ignore cloud build artifacts
+.gcloudignore
+
+# Ignore generated plots and reports
+plots/
+reports/
+
+# Ignore Jupyter Notebook checkpoints
+*.ipynb_checkpoints/
