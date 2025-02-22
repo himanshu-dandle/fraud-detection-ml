@@ -1,192 +1,155 @@
-AI-Powered HR Chatbot with Slack Integration
+# 🚀 Fraud Detection System using Machine Learning  
 
-🔗 Live Demo: 👉 HR Chatbot on Slack
-💻 GitHub Repository: 👉 genai_chatbot
+![GitHub repo size](https://img.shields.io/github/repo-size/himanshu-dandle/fraud-detection-ml?style=flat)  
+![GitHub contributors](https://img.shields.io/github/contributors/himanshu-dandle/fraud-detection-ml?color=blue)  
+![GitHub last commit](https://img.shields.io/github/last-commit/himanshu-dandle/fraud-detection-ml)  
 
-📌 Project Overview
-🚀 An AI-powered HR chatbot that automates HR queries using GPT-4, Slack API, and Azure Cognitive Services. It provides instant answers to employee queries related to HR policies, reducing response time and improving efficiency.
+🔗 **Live Web App:** 👉 [Click Here to Try!](https://fraud-detection-ml-pxygeugketyaekpkctz52d.streamlit.app/)
 
-✅ Key Features:
-✔ Real-Time HR Assistance – Answers HR-related queries in Slack.
-✔ GPT-4 Powered AI – Uses OpenAI for intelligent responses.
-✔ Azure Cognitive Services – Extracts relevant info from HR documents.
-✔ FastAPI Backend – Deployed on Render for scalability.
-✔ Slack API Integration – Bot listens to @mentions and responds instantly.
+💻 **GitHub Repository:** 👉 [fraud-detection-ml](https://github.com/himanshu-dandle/fraud-detection-ml)  
 
-🏗 Tech Stack Used
-Technology	Usage
-Python	Programming Language
-FastAPI, Uvicorn	Backend API
-OpenAI GPT-4	AI-Powered Responses
-Slack API, Slack SDK	Slack Integration
-Azure Cognitive Services	HR Policy Document Search
-Render	API Deployment
-📂 Project Structure
-bash
-Copy
-Edit
-gen_ai_chatbot/
-│── hr_documents/            # HR policy documents (text & PDFs)
-│── .env                     # API keys & environment variables (DO NOT COMMIT)
-│── chatbot_api.py           # FastAPI backend
-│── chatbot_ui.py            # Streamlit frontend (if required)
-│── azure_text_analysis.py   # Azure Cognitive Services integration
-│── read_documents.py        # HR document retrieval logic
-│── requirements.txt         # Python dependencies
-│── README.md                # Project documentation
+---
+
+## 📌 **Project Overview**  
+
+🚨 **Fraudulent transactions cost billions every year.** This project builds an **AI-powered fraud detection system** that identifies fraudulent transactions in real-time using **Machine Learning (XGBoost, Scikit-Learn)** and is deployed with **FastAPI & Streamlit**.  
+
+### ✅ **Key Features:**  
+✔ **Real-Time Fraud Prediction** – Enter transaction data & get fraud probability instantly.  
+✔ **Machine Learning Model** – Uses **XGBoost**, trained on an **imbalanced dataset**.  
+✔ **FastAPI Backend** – Hosted on **Google Cloud Run** for live predictions.  
+✔ **Streamlit Web UI** – User-friendly interface deployed on **Streamlit Cloud**.  
+
+---
+
+## 🏗 **Tech Stack Used**  
+
+| Technology | Usage |
+|------------|------------------|
+| **Python** | Programming Language |
+| **XGBoost, Scikit-Learn** | Machine Learning Model |
+| **FastAPI, Uvicorn** | Backend API |
+| **Streamlit** | Frontend Web App |
+| **Google Cloud Run** | API Deployment |
+| **Streamlit Cloud** | Web UI Deployment |
+| **Pandas, NumPy** | Data Processing |
+| **Matplotlib, Seaborn** | Data Visualization |
+
+---
+
+## 📂 **Project Structure**  
+
+```
+fraud-detection-ml/
+│── data/                    # Raw and processed datasets (ignored in Git)
+│── models/                  # Trained ML models (ignored in Git)
+│── reports/                 # Reports, confusion matrices, AUC curves
+│── scripts/                 # Helper scripts for training & deployment
+│── fraud_detection.ipynb     # Jupyter Notebook for model training
+│── app.py                    # FastAPI backend (Deployed on Google Cloud Run)
+│── streamlit_app.py          # Streamlit frontend (Deployed on Streamlit Cloud)
+│── Dockerfile                # Configuration for FastAPI deployment
+│── requirements.txt          # Dependencies for FastAPI & Streamlit
+│── .gitignore                # Excludes large files from GitHub
+│── .gcloudignore             # Excludes unnecessary files for Google Cloud
+└── README.md                 # Project documentation (this file)
+
+
+
+
 🛠 How to Run the Project Locally
 ✅ 1. Clone the Repository
 
-sh
-Copy
-Edit
-git clone https://github.com/himanshu-dandle/genai_chatbot.git
-cd genai_chatbot
-✅ 2. Create a Virtual Environment
-
-sh
-Copy
-Edit
-python -m venv genai_hr_chatbot_env
-source genai_hr_chatbot_env/bin/activate  # Mac/Linux
-genai_hr_chatbot_env\Scripts\activate    # Windows
-✅ 3. Install Dependencies
-
-sh
-Copy
-Edit
+git clone https://github.com/himanshu-dandle/fraud-detection-ml.git
+cd fraud-detection-ml
+✅ 2. Install Dependencies
 pip install -r requirements.txt
-✅ 4. Set Up Environment Variables
+✅ 3. Run FastAPI Backend (Local Server)
 
-Create a .env file in the root directory and add the following:
+uvicorn app:app --host 0.0.0.0 --port 8000 --reload
+🔹 API will be available at http://localhost:8000/
+🔹 Test it using Postman or cURL.
 
-ini
-Copy
-Edit
-OPENAI_API_KEY="your-openai-api-key"
-AZURE_TEXT_ANALYTICS_KEY="your-azure-key"
-AZURE_TEXT_ANALYTICS_ENDPOINT="your-azure-endpoint"
-SLACK_BOT_TOKEN="xoxb-your-slack-bot-token"
-✅ 5. Run FastAPI Backend
+✅ 4. Run Streamlit Web UI (Local App)
 
-sh
-Copy
-Edit
-uvicorn chatbot_api:app --host 0.0.0.0 --port 8000 --reload
-📍 The API will be available at:
-🔹 http://127.0.0.1:8000
-🔹 Swagger Docs: http://127.0.0.1:8000/docs
+streamlit run streamlit_app.py
+🔹 This will open the web app at http://localhost:8501/
+🔹 Users can input transaction data & check fraud probability!
 
-✅ 6. Run the Slack Bot Locally
+🚀 How to Deploy (For Advanced Users)
+✅ Deploy FastAPI Backend on Google Cloud Run
 
-sh
-Copy
-Edit
-python chatbot_api.py
-🔗 Slack Bot Setup
-✅ 1. Create a Slack App
+gcloud builds submit --tag gcr.io/YOUR_PROJECT_ID/fraud-api
+gcloud run deploy fraud-api --image gcr.io/YOUR_PROJECT_ID/fraud-api --platform managed --region us-central1 --allow-unauthenticated
+🔹 This will host the FastAPI backend online for public use.
 
-Visit Slack API Apps.
-Click "Create New App" → Choose "From Scratch".
-Enter an App Name (e.g., HR Chatbot) and select your workspace.
-✅ 2. Configure OAuth & Permissions
+✅ Deploy Streamlit Web App on Streamlit Cloud
+1️⃣ Upload the project to GitHub
+2️⃣ Go to Streamlit Cloud
+3️⃣ Select your GitHub Repo
+4️⃣ Set the Main File Path → streamlit_app.py
+5️⃣ Click Deploy 🚀
 
-Go to "OAuth & Permissions" and add the following Bot Token Scopes:
+🔹 After a few minutes, your public Streamlit App will be live!
 
-Scope	Description
-app_mentions:read	Detect when bot is mentioned
-calls:write	Start & manage calls
-channels:read	Read public channels
-chat:write	Send messages in Slack
-commands	Add shortcuts/slash commands
-groups:read	Read private channels bot has access to
-im:history	Read direct messages bot has access to
-im:read	View basic DM info
-im:write	Start DMs with users
-✅ 3. Install the App in Your Slack Workspace
-
-Click "Install to Workspace".
-Click Allow to grant permissions.
-Copy the Bot User OAuth Token (xoxb-...) and add it to .env.
-✅ 4. Enable Event Subscriptions
-
-Go to "Event Subscriptions" → Toggle Enable Events: ON.
-Set Request URL to:
-bash
-Copy
-Edit
-https://genai-chatbot-3uqj.onrender.com/slack/events
-Click Verify → Ensure Verified status.
-Subscribe to Bot Events:
-app_mention
-message.im
-✅ 5. Invite Bot to a Slack Channel
-
-Open Slack.
-Go to a channel (e.g., #general).
-Type:
-bash
-Copy
-Edit
-/invite @HR Chatbot
-Test it by typing:
-kotlin
-Copy
-Edit
-@HR Chatbot What is the sick leave policy?
-☁️ Deploy on Render
-✅ 1. Deploy the Web Service
-
-Go to Render.
-
-Click "New Web Service" → Connect GitHub repository.
-
-Set environment variables in Render Dashboard:
-
-ini
-Copy
-Edit
-OPENAI_API_KEY=your-openai-api-key
-AZURE_TEXT_ANALYTICS_KEY=your-azure-key
-AZURE_TEXT_ANALYTICS_ENDPOINT=your-azure-endpoint
-SLACK_BOT_TOKEN=xoxb-your-slack-bot-token
-Set Start Command:
-
-sh
-Copy
-Edit
-uvicorn chatbot_api:app --host 0.0.0.0 --port $PORT
-Click Deploy.
-
-📍 Once deployed, the API will be accessible at:
-🔗 https://genai-chatbot-3uqj.onrender.com
-
-🔌 API Usage (Testing the Bot in Slack)
-✅ Send a Test Message via cURL
-
-sh
-Copy
-Edit
-curl -k -X POST "https://slack.com/api/chat.postMessage" ^
--H "Authorization: Bearer xoxb-your-slack-token" ^
--H "Content-Type: application/json" ^
--d "{ \"channel\": \"YOUR_CHANNEL_ID\", \"text\": \"Hello from my bot!\" }"
-✅ Expected Output:
+🔌 API Usage (Example Request & Response)
+✅ POST Request Example
+📌 Send JSON data to FastAPI for fraud detection:
 
 json
-Copy
-Edit
-{ "ok": true, "channel": "C08DVTGCQSH", "message": { "text": "Hello from my bot!" } }
-📊 Troubleshooting
-❌ Bot Not Responding in Slack?
-✔ Ensure the bot is invited to the channel.
-✔ Verify event subscriptions are configured correctly.
-✔ Restart the bot by redeploying on Render.
 
-❌ Slack Bot Token Not Working?
-✔ Reinstall the Slack App and generate a new token.
-✔ Ensure correct OAuth scopes are assigned.
 
-📜 License
-MIT License - Free to use and modify.
+{
+    "V1": -1.359,
+    "V2": -0.072,
+    "V3": 2.536,
+    "V4": 1.378,
+    "V5": -0.338,
+    "V6": 0.462,
+    "V7": 0.239,
+    "V8": 0.098,
+    "V9": 0.363,
+    "V10": 0.090,
+    "V11": -0.551,
+    "V12": -0.617,
+    "V13": -0.991,
+    "V14": -0.311,
+    "V15": 1.468,
+    "V16": -0.470,
+    "V17": 0.207,
+    "V18": 0.025,
+    "V19": 0.403,
+    "V20": 0.251,
+    "V21": -0.018,
+    "V22": 0.277,
+    "V23": -0.110,
+    "V24": 0.066,
+    "V25": 0.128,
+    "V26": -0.189,
+    "V27": 0.133,
+    "V28": -0.021,
+    "Hour": 12.5
+}
+✅ Response Example
+json
+
+
+{
+    "prediction": 0,
+    "fraud_probability": 0.02
+}
+🔹 prediction: 0 → Safe Transaction
+🔹 prediction: 1 → Fraud Detected! 🚨
+
+🎯 Future Improvements
+✅ Enhance Model Performance – Try LSTM, Random Forest, or Neural Networks
+✅ Add More Features – Include location & device ID for fraud detection
+✅ Improve UI – Add graphs & probability distributions in Streamlit
+
+🤝 Contributors
+👨‍💻 Himanshu Dandle
+📌 GitHub: himanshu-dandle
+📌 LinkedIn: Himanshu Dandle
+
+🔹 If you like this project, give it a ⭐ on GitHub! 🚀
 
